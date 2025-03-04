@@ -48,55 +48,72 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-collapse sidebar-mini login-page">
-<!-- Site wrapper -->
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
+ 
+  <?php
 
-<?php
+  if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
 
-if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"]=="ok"){
+   echo '<div class="wrapper">';
 
-echo "<div class='wrapper'>";
+    /*=============================================
+    CABEZOTE
+    =============================================*/
 
-include "modulos/cabecera.php";
+    include "modulos/cabecera.php";
 
-include "modulos/menu.php";
+    /*=============================================
+    MENU
+    =============================================*/
 
-if (isset($_GET["ruta"])){
+    include "modulos/menu.php";
 
-      if ($_GET["ruta"] == "inicio" ||
-      $_GET["ruta"] == "usuarios"   ||  
-      $_GET["ruta"] == "categorias" ||
-      $_GET["ruta"] == "productos" ||
-      $_GET["ruta"] == "clientes" ||
-      $_GET["ruta"] == "ventas" ||
-      $_GET["ruta"] == "crear_ventas" ||
-      $_GET["ruta"] == "reporte_ventas" ||
-      $_GET["ruta"] == "productos"){
+    /*=============================================
+    CONTENIDO
+    =============================================*/
+
+    if(isset($_GET["ruta"])){
+
+      if($_GET["ruta"] == "inicio" ||
+         $_GET["ruta"] == "usuarios" ||
+         $_GET["ruta"] == "categorias" ||
+         $_GET["ruta"] == "productos" ||
+         $_GET["ruta"] == "clientes" ||
+         $_GET["ruta"] == "ventas" ||
+         $_GET["ruta"] == "crear_ventas" ||
+         $_GET["ruta"] == "reporte_ventas" ||
+         $_GET["ruta"] == "salir"){
 
           include "modulos/".$_GET["ruta"].".php";
 
         }else{
-
-          include "modulos/404.php";    
-
-        };
-      
-    }else{
-
+  
+          include "modulos/404.php";
+  
+        }
+  
+      }else{
+  
         include "modulos/inicio.php";
-
+  
+      }  
+   
+  
+      /*=============================================
+      FOOTER
+      =============================================*/
+  
+      include "modulos/piepagina.php";
+  
+      echo '</div>';
+  
+   }else{
+  
+      include "modulos/login.php";
+  
     }
-    include "modulos/piepagina.php";
 
-  }else{
-    include "modulos/login.php";
-
-  }
-
-
-?>
-</div>
-<!-- ./wrapper -->
+    ?>
 
 <script src="vistas/js/plantilla.js"></script> 
 
